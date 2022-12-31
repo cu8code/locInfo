@@ -14,33 +14,33 @@ function pan(editorCanvasContent, event) {
 
 
 export default function EditorCanvas() {
-  const editorCanvasContent = useRef(null)
+  const canvas = useRef(null)
+  const canvasContainer = useRef(null);
 
   // zoom useeffect
-  
+
   useEffect(() => {
-    const element = editorCanvasContent.current;
+    const element = canvasContainer.current
     const zoom = event => {
       event.preventDefault();
       let zoomVal = Math.sign(event.deltaY);
-      if(zoomVal==1){
+      if(zoomVal==1&&currentZoomValue>0.3){
         currentZoomValue -= zoomDifferenceValue;
-      }else{
+      }else if(zoomVal==-1&&currentZoomValue<2){
         currentZoomValue += zoomDifferenceValue;
       }
-      element.style.transform = `scale(${currentZoomValue})`;
+      canvas.current.style.transform = `scale(${currentZoomValue})`;
     }
-    console.log(element);
     element.addEventListener("wheel",zoom)
     return () => {
-      element.removeEventListener("wheel",zoom)
+      canvasContainer.current.removeEventListener("wheel",zoom)
     };
   }, []);
   return <>
     {/* editroCanvas */}
-    <div onScroll={() => console.log("editroCanvas")} className="top-0 left-0 h-screen w-screen bg-slate-500 overflow-auto flex justify-center">
+    <div onScroll={() => console.log("editroCanvas")} ref={canvasContainer} className="top-0 left-0 h-screen w-screen bg-slate-500 overflow-auto flex justify-center items-center">
       {/* this main elemet will be the representation of pdf page */}
-      <main ref={editorCanvasContent} className="fixed w-2/5 h-5/6 bg-white transition duration-100 ease-in-out"> CANVAS </main>
+      <main ref={canvas} className="fixed w-2/6 h-5/6 bg-white transition duration-100 ease-in-out"> CANVAS </main>
     </div>
   </>
 }
