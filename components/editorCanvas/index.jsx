@@ -39,7 +39,7 @@ export default function EditorCanvas() {
     {/* editroCanvas */}
     <div onScroll={() => console.log("editroCanvas")} className="fixed top-0 left-0 h-screen w-screen bg-slate-500 overflow-auto">
       {/* this main elemet will be the representation of pdf page */}
-      <main ref={editorCanvasContent} className="bg-white"> CANVAS </main>
+      <main ref={editorCanvasContent} className="bg-white transition duration-20"> CANVAS </main>
     </div>
     {/* zoom control button that will be placed at the end of the screen */}
     <div className="fixed w-screen h-screen top-0 left-0 flex justify-center">
