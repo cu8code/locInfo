@@ -3,10 +3,11 @@
  * show the preview in real time
  * */
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
-let currentZoomValue = 1;
+let currentZoomValue = 0.45;
 const zoomDifferenceValue = 0.05;
+let pages = 1;
 
 // for pan
 let mouseDown = false; //if mouse is clicked
@@ -25,10 +26,28 @@ const pan = (e, element) => {
   if (mouseDown /*&& !isInViewport(element)*/) {
     // stack overflow :)
     element.style.top = e.clientY + canvasOffset[1] + "px";
+    element.style.left = e.clientX + canvasOffset[0] + "px";
   }
   // console.log(rect.top<=);
 };
+
+
+const Page = ()=>{
+  return(
+    <main
+      style={{
+        width: "210mm",
+        height: "297mm",
+      }}
+      className="bg-white transition duration-100 ease-in-out"
+    >
+      {" "}
+      CANVAS{" "}
+    </main>
+  );
+}
 export default function EditorCanvas() {
+  const [pagesArray,setPages]=useState([{key:1}])
   const canvas = useRef(null);
   const canvasContainer = useRef(null);
 
@@ -74,18 +93,29 @@ export default function EditorCanvas() {
       {/* editroCanvas */}
       <div
         onScroll={() => console.log("editroCanvas")}
+        style={{ background: "#171717" }}
         ref={canvasContainer}
-        className="top-0 left-0 h-screen w-screen bg-slate-500 overflow-auto flex justify-center items-center"
+        className="overflow-hidden top-0 left-0 h-screen w-screen flex justify-center items-center"
       >
         {/* this main elemet will be the representation of pdf page */}
-        <main
+        <div
           ref={canvas}
-          className="fixed w-2/6 h-5/6 bg-white transition duration-100 ease-in-out"
+          style={{
+            transform: "scale(0.45)",
+            minWidth: "210mm",
+            minHeight: "210mm",
+          }}
+          className="w-fit h-fit fixed gap-8 flex"
         >
-          {" "}
-          CANVAS{" "}
-        </main>
+        {pagesArray.map((data)=>{
+          return(
+            <Page key={data.key}/>
+          )
+        })}
+        </div>
+        
       </div>
+      <button className="fixed top-0 bg-white" onClick={()=>{pages++;setPages([...pagesArray,{key:pages}])}}>Add page</button>
     </>
   );
 }
