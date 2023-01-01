@@ -33,7 +33,7 @@ export default function EditorCanvas() {
     }
     element.addEventListener("wheel",zoom)
     return () => {
-      canvasContainer.current.removeEventListener("wheel",zoom)
+      element.removeEventListener("wheel",zoom)
     };
   }, []);
   return <>
