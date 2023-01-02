@@ -59,7 +59,7 @@ const zoom = (event, maxZoom, minZoom) => {
   canvas.current.style.transform = `scale(${currentZoomValue})`;
 };
 
-const addPages = (pagesArray, canvas) => {
+const addPages = (pagesArray,setPages,canvas) => {
   pages++;
   setPages([...pagesArray, { key: pages }]);
   console.log(canvas.current.style.left)
@@ -122,7 +122,7 @@ export default function EditorCanvas({ maxZoom, minZoom }) {
           })}
         </div>
       </div>
-      <button className="fixed top-0 bg-white" onClick={() => addPages(pagesArray, canvas)}>Add page</button>
+      <button className="fixed top-0 bg-white" onClick={() => addPages(pagesArray,setPages,canvas)}>Add page</button>
     </>
   );
 }
