@@ -47,8 +47,9 @@ const Page = () => {
   );
 }
 
-const zoom = (event, maxZoom, minZoom) => {
+const zoom = (event, maxZoom, minZoom, canvas) => {
   event.preventDefault();
+  if (canvas === null) return
   let zoomVal = Math.sign(event.deltaY);
   if (zoomVal == 1 && currentZoomValue > minZoom) {
     currentZoomValue -= zoomDifferenceValue;
@@ -59,7 +60,7 @@ const zoom = (event, maxZoom, minZoom) => {
   canvas.current.style.transform = `scale(${currentZoomValue})`;
 };
 
-const addPages = (pagesArray,setPages,canvas) => {
+const addPages = (pagesArray, setPages, canvas) => {
   pages++;
   setPages([...pagesArray, { key: pages }]);
   console.log(canvas.current.style.left)
@@ -73,7 +74,7 @@ export default function EditorCanvas({ maxZoom, minZoom }) {
   useEffect(() => {
     const element = canvasContainer.current;
     //event listeners for zoom and pan
-    element.addEventListener("wheel", (e) => zoom(e, maxZoom, minZoom));
+    element.addEventListener("wheel", (e) => zoom(e, maxZoom, minZoom, canvas));
 
     element.addEventListener("mousedown", (e) => {
       e.preventDefault();
@@ -91,7 +92,7 @@ export default function EditorCanvas({ maxZoom, minZoom }) {
       pan(e, canvas.current);
     });
     return () => {
-      element.removeEventListener("wheel", zoom);
+      element.removeEventListener("wheel", (e) => zoom(e, maxZoom, minZoom, canvas));
     };
   }, []);
   return (
@@ -122,7 +123,7 @@ export default function EditorCanvas({ maxZoom, minZoom }) {
           })}
         </div>
       </div>
-      <button className="fixed top-0 bg-white" onClick={() => addPages(pagesArray,setPages,canvas)}>Add page</button>
+      <button className="fixed top-0 bg-white" onClick={() => addPages(pagesArray, setPages, canvas)}>Add page</button>
     </>
   );
 }
