@@ -5,7 +5,7 @@
 
 import { useRef, useEffect, useState } from "react";
 
-let currentZoomValue = 0.45;
+let currentZoomValue = 0.6;
 const zoomDifferenceValue = 0.05;
 let pages = 1;
 
@@ -53,7 +53,6 @@ export default function EditorCanvas() {
 
   useEffect(() => {
     const element = canvasContainer.current;
-
     const zoom = (event) => {
       event.preventDefault();
       let zoomVal = Math.sign(event.deltaY);
@@ -62,6 +61,7 @@ export default function EditorCanvas() {
       } else if (zoomVal == -1 && currentZoomValue < 2) {
         currentZoomValue += zoomDifferenceValue;
       }
+      console.log(event.x,event.y,",",canvas.current.offsetLeft);
       canvas.current.style.transform = `scale(${currentZoomValue})`;
     };
 
@@ -87,7 +87,12 @@ export default function EditorCanvas() {
       element.removeEventListener("wheel", zoom);
     };
   }, []);
+  const addPages=()=>{
+    pages++;
+    setPages([...pagesArray,{key:pages}]);
+    console.log(canvas.current.style.left)
 
+  }
   return (
     <>
       {/* editroCanvas */}
@@ -101,11 +106,13 @@ export default function EditorCanvas() {
         <div
           ref={canvas}
           style={{
-            transform: "scale(0.45)",
+            transform: "scale(0.6)",
             minWidth: "210mm",
             minHeight: "210mm",
+            left: "35vw",
+            transformOrigin:"0% center"
           }}
-          className="w-fit h-fit fixed gap-8 flex"
+          className="w-fit h-fit fixed gap-8 flex flex-row"
         >
         {pagesArray.map((data)=>{
           return(
@@ -115,7 +122,7 @@ export default function EditorCanvas() {
         </div>
         
       </div>
-      <button className="fixed top-0 bg-white" onClick={()=>{pages++;setPages([...pagesArray,{key:pages}])}}>Add page</button>
+      <button className="fixed top-0 bg-white" onClick={addPages}>Add page</button>
     </>
   );
 }
