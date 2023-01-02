@@ -19,17 +19,17 @@ let canvasOffset = [0, 0];
 //   return rect.top >= 0 && rect.bottom <= window.innerHeight;
 // };
 
-const pan = (e, element) => {
-  e.preventDefault();
-  const rect = element.getBoundingClientRect();
-  //if mouse is clicked and canvas is out of viewport due to zoom
-  if (mouseDown /*&& !isInViewport(element)*/) {
-    // stack overflow :)
-    element.style.top = e.clientY + canvasOffset[1] + "px";
-    element.style.left = e.clientX + canvasOffset[0] + "px";
-  }
-  // console.log(rect.top<=);
-};
+// const pan = (e, element) => {
+//   e.preventDefault();
+//   const rect = element.getBoundingClientRect();
+//   //if mouse is clicked and canvas is out of viewport due to zoom
+//   if (mouseDown /*&& !isInViewport(element)*/) {
+//     // stack overflow :)
+//     element.style.top = e.clientY + canvasOffset[1] + "px";
+//     element.style.left = e.clientX + canvasOffset[0] + "px";
+//   }
+//   // console.log(rect.top<=);
+// };
 
 
 const Page = () => {
@@ -56,14 +56,12 @@ const zoom = (event, maxZoom, minZoom, canvas) => {
   } else if (zoomVal == -1 && currentZoomValue < maxZoom) {
     currentZoomValue += zoomDifferenceValue;
   }
-  console.log(event.x, event.y, ",", canvas.current.offsetLeft);
   canvas.current.style.transform = `scale(${currentZoomValue})`;
 };
 
-const addPages = (pagesArray, setPages, canvas) => {
+const addPages = (pagesArray, setPages) => {
   pages++;
   setPages([...pagesArray, { key: pages }]);
-  console.log(canvas.current.style.left)
 }
 
 export default function EditorCanvas({ maxZoom, minZoom }) {
@@ -76,21 +74,21 @@ export default function EditorCanvas({ maxZoom, minZoom }) {
     //event listeners for zoom and pan
     element.addEventListener("wheel", (e) => zoom(e, maxZoom, minZoom, canvas));
 
-    element.addEventListener("mousedown", (e) => {
-      e.preventDefault();
-      mouseDown = true;
-      // logic from stack overflow
-      canvasOffset = [
-        canvas.current.offsetLeft - e.clientX,
-        canvas.current.offsetTop - e.clientY,
-      ];
-    });
-    element.addEventListener("mouseup", () => {
-      mouseDown = false;
-    });
-    element.addEventListener("mousemove", (e) => {
-      pan(e, canvas.current);
-    });
+    // element.addEventListener("mousedown", (e) => {
+    //   e.preventDefault();
+    //   mouseDown = true;
+    //   // logic from stack overflow
+    //   canvasOffset = [
+    //     canvas.current.offsetLeft - e.clientX,
+    //     canvas.current.offsetTop - e.clientY,
+    //   ];
+    // });
+    // element.addEventListener("mouseup", () => {
+    //   mouseDown = false;
+    // });
+    // element.addEventListener("mousemove", (e) => {
+    //   pan(e, canvas.current);
+    // });
     return () => {
       element.removeEventListener("wheel", (e) => zoom(e, maxZoom, minZoom, canvas));
     };
@@ -99,10 +97,9 @@ export default function EditorCanvas({ maxZoom, minZoom }) {
     <>
       {/* editroCanvas */}
       <div
-        onScroll={() => console.log("editroCanvas")}
         style={{ background: "#171717" }}
         ref={canvasContainer}
-        className="overflow-hidden top-0 left-0 h-screen w-screen flex justify-center items-center"
+        className="top-0 left-0 h-fit w-screen flex justify-center overflow-auto pt-8"
       >
         {/* this main elemet will be the representation of pdf page */}
         <div
@@ -111,10 +108,10 @@ export default function EditorCanvas({ maxZoom, minZoom }) {
             transform: "scale(0.6)",
             minWidth: "210mm",
             minHeight: "210mm",
-            left: "35vw",
-            transformOrigin: "0% center"
+            // left: "35vw",
+            transformOrigin: "center 0%",
           }}
-          className="w-fit h-fit fixed gap-8 flex flex-row"
+          className="w-fit h-fit gap-8 flex flex-col"
         >
           {pagesArray.map((data) => {
             return (
@@ -123,7 +120,7 @@ export default function EditorCanvas({ maxZoom, minZoom }) {
           })}
         </div>
       </div>
-      <button className="fixed top-0 bg-white" onClick={() => addPages(pagesArray, setPages, canvas)}>Add page</button>
+      <button className="fixed top-0 bg-white" onClick={() => addPages(pagesArray, setPages)}>Add page</button>
     </>
   );
 }
