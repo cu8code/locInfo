@@ -1,126 +1,52 @@
-/*
- * this cpmponent responsibe for create the main canvas over which we will
- * show the preview in real time
- * */
-
-import { useRef, useEffect, useState } from "react";
-
-let currentZoomValue = 0.6;
-const zoomDifferenceValue = 0.05;
-let pages = 1;
-
-// for pan
-let mouseDown = false; //if mouse is clicked
-let canvasOffset = [0, 0];
-
-// checking if canvas is out of viewport
-// const isInViewport = (element) => {
-//   const rect = element.getBoundingClientRect();
-//   return rect.top >= 0 && rect.bottom <= window.innerHeight;
-// };
-
-// const pan = (e, element) => {
-//   e.preventDefault();
-//   const rect = element.getBoundingClientRect();
-//   //if mouse is clicked and canvas is out of viewport due to zoom
-//   if (mouseDown /*&& !isInViewport(element)*/) {
-//     // stack overflow :)
-//     element.style.top = e.clientY + canvasOffset[1] + "px";
-//     element.style.left = e.clientX + canvasOffset[0] + "px";
-//   }
-//   // console.log(rect.top<=);
-// };
-
-
-const Page = () => {
-  return (
-    <main
-      style={{
-        width: "210mm",
-        height: "297mm",
-      }}
-      className="bg-white transition duration-100 ease-in-out"
-    >
-      {" "}
-      CANVAS{" "}
-    </main>
-  );
-}
-
-const zoom = (event, maxZoom, minZoom, canvas) => {
-  event.preventDefault();
-  if (canvas === null) return
-  let zoomVal = Math.sign(event.deltaY);
-  if (zoomVal == 1 && currentZoomValue > minZoom) {
-    currentZoomValue -= zoomDifferenceValue;
-  } else if (zoomVal == -1 && currentZoomValue < maxZoom) {
-    currentZoomValue += zoomDifferenceValue;
-  }
-  canvas.current.style.transform = `scale(${currentZoomValue})`;
+import { useEffect, useRef, useState } from "react";
+import Page from "./pages";
+const jsonData = {
+  education: {
+    school: [
+      {
+        name: "abc school",
+        yearStart: 2010,
+        yearEnd: 2019,
+      },
+      {
+        name: "abc school 2",
+        yearStart: 2019,
+        yearEnd: 2021,
+      },
+    ],
+    university: [
+      {
+        name: "abc college",
+        yearStart: 2021,
+        yearEnd: 2025,
+        degree: "Btech in cse",
+      },
+    ],
+  },
+  workExperience: [
+    {
+      name: "abc pvt ltd",
+      yearStart: 2025,
+      yearEnd: 2026,
+      position: "sde",
+      description: "did stuff",
+    },
+  ],
 };
 
-const addPages = (pagesArray, setPages) => {
-  pages++;
-  setPages([...pagesArray, { key: pages }]);
-}
-
-export default function EditorCanvas({ maxZoom, minZoom }) {
-  const [pagesArray, setPages] = useState([{ key: 1 }])
-  const canvas = useRef(null);
-  const canvasContainer = useRef(null);
-
-  useEffect(() => {
-    const element = canvasContainer.current;
-    //event listeners for zoom and pan
-    element.addEventListener("wheel", (e) => zoom(e, maxZoom, minZoom, canvas));
-
-    // element.addEventListener("mousedown", (e) => {
-    //   e.preventDefault();
-    //   mouseDown = true;
-    //   // logic from stack overflow
-    //   canvasOffset = [
-    //     canvas.current.offsetLeft - e.clientX,
-    //     canvas.current.offsetTop - e.clientY,
-    //   ];
-    // });
-    // element.addEventListener("mouseup", () => {
-    //   mouseDown = false;
-    // });
-    // element.addEventListener("mousemove", (e) => {
-    //   pan(e, canvas.current);
-    // });
-    return () => {
-      element.removeEventListener("wheel", (e) => zoom(e, maxZoom, minZoom, canvas));
-    };
-  }, []);
+export default function EditorCanvas({ zoomVal, pages }) {
   return (
     <>
-      {/* editroCanvas */}
-      <div
-        style={{ background: "#171717" }}
-        ref={canvasContainer}
-        className="top-0 left-0 h-fit w-screen flex justify-center overflow-auto pt-8"
-      >
-        {/* this main elemet will be the representation of pdf page */}
+      <div className="w-full min-h-full h-fit flex justify-center">
         <div
-          ref={canvas}
-          style={{
-            transform: "scale(0.6)",
-            minWidth: "210mm",
-            minHeight: "210mm",
-            // left: "35vw",
-            transformOrigin: "center 0%",
-          }}
-          className="w-fit h-fit gap-8 flex flex-col"
+          style={{ transform: `scale(${zoomVal})` }}
+          className="pt-4 pb-4 w-fit h-fit flex flex-col gap-2 origin-top duration-200"
         >
-          {pagesArray.map((data) => {
-            return (
-              <Page key={data.key} />
-            )
+          {pages.map((data) => {
+            return <Page key={data.key} num={data.key} json={jsonData} />;
           })}
         </div>
       </div>
-      <button className="fixed top-0 bg-white" onClick={() => addPages(pagesArray, setPages)}>Add page</button>
     </>
   );
 }
