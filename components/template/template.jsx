@@ -25,6 +25,6 @@ const Two = ({ json }) => {
   );
 };
 export default function Templates({ json, num }) {
-  const Temp = [<Empty />, <One json={json} />, <Two json={json} />];
+  const Temp = [<Empty key={0}/>, <One json={json} key={1}/>, <Two json={json} key={2} />];
   return <>{Temp[num]}</>;
 }
