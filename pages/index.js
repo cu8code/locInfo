@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { sectionButtons } from "./icon";
 
 import EditorCanvas from "../components/editorCanvas";
 import CanvasButton from "../components/canvasInput/canvasButtons";
@@ -8,6 +7,33 @@ import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 
+import SchoolIcon from "@mui/icons-material/School";
+import WorkIcon from "@mui/icons-material/Work";
+import PersonIcon from "@mui/icons-material/Person"; //profile
+import LocationCityIcon from "@mui/icons-material/LocationCity"; //location
+import RedeemIcon from "@mui/icons-material/Redeem"; //certificate
+import ComputerIcon from "@mui/icons-material/Computer"; //skills
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents"; //awards
+import CoffeeIcon from "@mui/icons-material/Coffee"; //projects
+import LanguageIcon from "@mui/icons-material/Language"; //language
+import InterestsIcon from "@mui/icons-material/Interests"; //interests
+import GroupsIcon from "@mui/icons-material/Groups"; //references
+import TagIcon from "@mui/icons-material/Tag"; //social media
+
+const sectionButtons = [
+  PersonIcon,
+  LanguageIcon,
+  TagIcon,
+  SchoolIcon,
+  WorkIcon,
+  LocationCityIcon,
+  ComputerIcon,
+  RedeemIcon,
+  CoffeeIcon,
+  EmojiEventsIcon,
+  GroupsIcon,
+  InterestsIcon,
+];
 let totalPages = 1;
 
 export default function Home() {
