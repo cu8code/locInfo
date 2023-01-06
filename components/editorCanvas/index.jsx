@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import Page from "./pages";
 const jsonData = {
   education: {
