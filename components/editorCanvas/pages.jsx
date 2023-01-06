@@ -1,12 +1,14 @@
-import Education from "../sections/education";
+import Templates from "../template/template";
 
-export default function Page({num,json}){
-    return(
-      <>
-        <div className="bg-white w-[70mm] h-[90mm]">
-          <Education education={json["education"]}/>
-        </div>
-        <div className="text-slate-50 bg-slate-700 text-xs text-right h-[1rem] mt-[-0.5rem]">Page: {num}</div>
-      </>
-    );
-  }
+export default function Page({ num, json, temp }) {
+  return (
+    <>
+      <div className="bg-white w-[70mm] h-[90mm] select-none">
+        {<Templates json={json} num={(num)==1?temp:0} />}
+      </div>
+      <div className="text-slate-50 bg-slate-700 text-xs text-right h-[1rem] mt-[-0.5rem]">
+        Page: {num}
+      </div>
+    </>
+  );
+}

@@ -34,7 +34,7 @@ const jsonData = {
   ],
 };
 
-export default function EditorCanvas({ zoomVal, pages }) {
+export default function EditorCanvas({ zoomVal, pages, temp}) {
   return (
     <>
       <div className="w-full min-h-full h-fit flex justify-center">
@@ -43,7 +43,9 @@ export default function EditorCanvas({ zoomVal, pages }) {
           className="pt-4 pb-4 w-fit h-fit flex flex-col gap-2 origin-top duration-200"
         >
           {pages.map((data) => {
-            return <Page key={data.key} num={data.key} json={jsonData} />;
+            return (
+              <Page key={data.key} num={data.key} json={jsonData} temp={temp} />
+            );
           })}
         </div>
       </div>
