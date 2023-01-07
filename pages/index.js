@@ -1,39 +1,8 @@
 import { useState } from "react";
-
 import EditorCanvas from "../components/editorCanvas";
-import CanvasButton from "../components/canvasInput/canvasButtons";
-import CanvasForm from "../components/forms";
-import ZoomInIcon from "@mui/icons-material/ZoomIn";
-import ZoomOutIcon from "@mui/icons-material/ZoomOut";
-import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import Sidebar from "../components/sidebar";
+import Navbar from "../components/navbar";
 
-import SchoolIcon from "@mui/icons-material/School";
-import WorkIcon from "@mui/icons-material/Work";
-import PersonIcon from "@mui/icons-material/Person"; //profile
-import LocationCityIcon from "@mui/icons-material/LocationCity"; //location
-import RedeemIcon from "@mui/icons-material/Redeem"; //certificate
-import ComputerIcon from "@mui/icons-material/Computer"; //skills
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents"; //awards
-import CoffeeIcon from "@mui/icons-material/Coffee"; //projects
-import LanguageIcon from "@mui/icons-material/Language"; //language
-import InterestsIcon from "@mui/icons-material/Interests"; //interests
-import GroupsIcon from "@mui/icons-material/Groups"; //references
-import TagIcon from "@mui/icons-material/Tag"; //social media
-
-const sectionButtons = [
-  PersonIcon,
-  LanguageIcon,
-  TagIcon,
-  SchoolIcon,
-  WorkIcon,
-  LocationCityIcon,
-  ComputerIcon,
-  RedeemIcon,
-  CoffeeIcon,
-  EmojiEventsIcon,
-  GroupsIcon,
-  InterestsIcon,
-];
 let totalPages = 1;
 
 export default function Home() {
@@ -53,32 +22,9 @@ export default function Home() {
     <>
       <div className="flex flex-col w-full h-screen overflow-x-auto fixed">
         <div className="w-full min-w-[860px]">
-          <nav className="w-full h-24 bg-slate-700 min-h-[6rem]">
-            <button onClick={() => handelZoom(zoom + 0.5)}>
-              <ZoomInIcon style={{ color: theme }} />
-            </button>
-            <button onClick={() => handelZoom(zoom - 0.5)}>
-              <ZoomOutIcon style={{ color: theme }} />
-            </button>
-            <button onClick={addPages}>
-              <NoteAddIcon style={{ color: theme }} />
-            </button>
-          </nav>
+          <Navbar zoom={zoom} fn1={handelZoom} fn2={addPages} theme={theme} />
           <div className="flex flex-1 h-[calc(100vh-6rem)]">
-            <div className="bg-slate-800 w-[40%] min-w-[400px] flex">
-              <div>
-                {sectionButtons.map((data, i) => {
-                  return (
-                    <CanvasButton
-                      key={i}
-                      Icon={data}
-                      callBack={() => setForm(i+1)}
-                    />
-                  );
-                })}
-              </div>
-              <div className="flex-1">{<CanvasForm index={sectionForm} />}</div>
-            </div>
+            <Sidebar callBack={setForm} formIndex={sectionForm} />
             <div className="bg-gray-800 flex-1 overflow-y-auto scrollbar-none scroll-smooth">
               <EditorCanvas zoomVal={zoom} pages={pages} temp={1} />
             </div>
