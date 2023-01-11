@@ -43,7 +43,7 @@ export default function EditorCanvas({ zoomVal, pages, temp}) {
         >
           {pages.map((data) => {
             return (
-              <Page key={data.key} num={data.key} json={jsonData} temp={temp} />
+              <Page key={data.key} num={data.key} temp={temp} />
             );
           })}
         </div>
