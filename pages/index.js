@@ -5,20 +5,20 @@ import Navbar from "../components/navbar";
 
 let totalPages = 1;
 export const jsonContext = createContext(null);
-const jsonData = {
-  profile: {
-    img: "",
-    firstName: "",
-    lastName: "",
-  },
-  education: {
-    school: [],
-    university: [],
-  },
-  workExperience: [],
-};
 
 export default function Home() {
+  const [jsonData, setData] = useState({
+    profile: {
+      img: "",
+      firstName: "",
+      lastName: "",
+    },
+    education: {
+      school: [],
+      university: [],
+    },
+    workExperience: [],
+  });
   const [theme, setTheme] = useState("white");
   const [zoom, setZoom] = useState(1.5);
   const [pages, setpages] = useState([{ key: 1 }]);
@@ -29,7 +29,7 @@ export default function Home() {
     totalPages++;
     setpages([...pages, { key: totalPages }]);
   };
-  
+
   return (
     <>
       <jsonContext.Provider value={jsonData}>
@@ -39,11 +39,7 @@ export default function Home() {
             <div className="flex flex-1 h-[calc(100vh-6rem)]">
               <Sidebar />
               <div className="bg-gray-800 flex-1 overflow-y-auto scrollbar-none scroll-smooth">
-                <EditorCanvas
-                  zoomVal={zoom}
-                  pages={pages}
-                  temp={1}
-                />
+                <EditorCanvas zoomVal={zoom} pages={pages} temp={1} />
               </div>
             </div>
           </div>
