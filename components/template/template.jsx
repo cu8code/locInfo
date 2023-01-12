@@ -28,12 +28,8 @@ const Two = ({ json }) => {
     </>
   );
 };
-export function useJsonContext(){
-  return useContext(jsonContext)
-}
-
 export default function Templates({ num }) {
-const json = useJsonContext();
+const json = useContext(jsonContext);
   const Temp = [<Empty />, <One json={json} />, <Two json={json} />];
   return <>{Temp[num]}</>;
 }

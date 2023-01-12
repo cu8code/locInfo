@@ -15,7 +15,6 @@ import InterestsIcon from "@mui/icons-material/Interests"; //interests
 import GroupsIcon from "@mui/icons-material/Groups"; //references
 import TagIcon from "@mui/icons-material/Tag"; //social media
 import { useRef } from "react";
-import { useJsonContext } from "../template/template";
 
 const sectionButtons = [
   PersonIcon,
@@ -32,7 +31,7 @@ const sectionButtons = [
   InterestsIcon,
 ];
 export default function Sidebar() {
-  const formData = useJsonContext();
+  const formData = useContext(jsonContext);
   const profile = useRef(null);
   const location = useRef(null);
   const social = useRef(null);
