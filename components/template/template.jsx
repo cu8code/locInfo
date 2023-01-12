@@ -10,7 +10,7 @@ const One = ({ json }) => {
   return (
     <>
       <div>template 1</div>
-      <Profile json={json}/>
+      <Profile json={json} />
       <div className="bg-red-400">
         <Education education={json["education"]} />
       </div>
@@ -21,7 +21,7 @@ const Two = ({ json }) => {
   return (
     <>
       <div>template 2</div>
-      <Profile/>
+      <Profile />
       <div className="bg-yellow-200">
         <Education education={json["education"]} />
       </div>
@@ -29,7 +29,7 @@ const Two = ({ json }) => {
   );
 };
 export default function Templates({ num }) {
-const json = useContext(jsonContext);
-  const Temp = [<Empty />, <One json={json} />, <Two json={json} />];
+  const json = useContext(jsonContext);
+  const Temp = [<Empty key={1} />, <One json={json} key={2} />, <Two json={json} key={3} />];
   return <>{Temp[num]}</>;
 }
