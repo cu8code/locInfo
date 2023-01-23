@@ -28,8 +28,8 @@ const Two = ({ json }) => {
 const Three = ({json})=>{
   
 }
-export default function Templates({ num }) {
+export default function Templates({ num: PageNumber }) {
 const [json,setData] = useJsonContext();
-  const Temp = [<Empty />, <One json={json} />, <Two json={json} />];
-  return <>{Temp[num]}</>;
+  const Temp = [<Empty key={1} />, <One json={json} key={2}/>, <Two json={json} key={3}/>];
+  return <>{Temp[PageNumber]}</>;
 }
