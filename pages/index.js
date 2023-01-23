@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import EditorCanvas from "../components/editorCanvas";
 import Sidebar from "../components/sidebar";
 import Navbar from "../components/navbar";
@@ -10,8 +10,7 @@ export default function Home() {
   const [jsonData, setData] = useState({
     profile: {
       img: "",
-      firstName: "",
-      lastName: "",
+      name:"",
     },
     education: {
       school: [],
@@ -32,14 +31,14 @@ export default function Home() {
 
   return (
     <>
-      <jsonContext.Provider value={jsonData}>
+      <jsonContext.Provider value={[jsonData,setData]}>
         <div className="flex flex-col w-full h-screen overflow-x-auto fixed">
           <div className="w-full min-w-[860px]">
             <Navbar zoom={zoom} fn1={handelZoom} fn2={addPages} theme={theme} />
             <div className="flex flex-1 h-[calc(100vh-6rem)]">
               <Sidebar />
               <div className="bg-gray-800 flex-1 overflow-y-auto scrollbar-none scroll-smooth">
-                <EditorCanvas zoomVal={zoom} pages={pages} temp={1} />
+                <EditorCanvas zoomVal={zoom} pages={pages} temp={2} />
               </div>
             </div>
           </div>

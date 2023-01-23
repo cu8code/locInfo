@@ -1,7 +1,10 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { jsonContext } from "../../pages";
 import CanvasButton from "../canvasInput/canvasButtons";
+import FormCover from "../forms/formCover";
+import FormInput from "../forms/formInput";
 
+//icons start
 import SchoolIcon from "@mui/icons-material/School";
 import WorkIcon from "@mui/icons-material/Work";
 import PersonIcon from "@mui/icons-material/Person"; //profile
@@ -15,6 +18,13 @@ import InterestsIcon from "@mui/icons-material/Interests"; //interests
 import GroupsIcon from "@mui/icons-material/Groups"; //references
 import TagIcon from "@mui/icons-material/Tag"; //social media
 import { useRef } from "react";
+//icons end
+
+//forms start
+import EducationForm from "../forms/education";
+import ProfileForm from "../forms/profile";
+import LocationForm from "../forms/location";
+//forms end
 
 const sectionButtons = [
   PersonIcon,
@@ -30,8 +40,9 @@ const sectionButtons = [
   GroupsIcon,
   InterestsIcon,
 ];
+
 export default function Sidebar() {
-  const formData = useContext(jsonContext);
+  const [formData, setData] = useContext(jsonContext);
   const profile = useRef(null);
   const location = useRef(null);
   const social = useRef(null);
@@ -58,9 +69,17 @@ export default function Sidebar() {
     references,
     interests,
   ];
+
+  const [toggle, setToggle] = useState(false);
+  const [currentForm, setForm] = useState(() => {});
+
   const scrollToView = (elem) => {
     elem.scrollIntoView({ behavior: "smooth", block: "start" });
-    console.log(formData);
+  };
+  const changeName = (e) => {
+    let copy = { ...formData };
+    copy.profile.name = e.target.value;
+    setData({ ...copy });
   };
   return (
     <>
@@ -79,17 +98,38 @@ export default function Sidebar() {
         <div className="flex-1 overflow-auto scrollbar-none scroll-smooth">
           <div>
             <section ref={profile} className="h-[400px]" id="1">
-              profile
-              <input type="text" onChange={(e)=>{formData.profile.firstName=e.target.value}}/>
+              <ProfileForm />
             </section>
             <section ref={location} className="h-[400px]" id="2">
-              location
+              <LocationForm />
             </section>
             <section ref={social} className="h-[400px]" id="3">
               social
             </section>
-            <section ref={school} className="h-[400px]" id="3">
-              school
+            <section
+              ref={school}
+              className="h-[400px]"
+              id="3"
+            >
+              <button
+                className="bg-white"
+                onClick={() => {
+                  setToggle(true);
+                  setForm(<EducationForm type="school" toggle={setToggle} />);
+                }}
+              >
+                Add School
+              </button>
+              <br/>
+              <button
+                className="bg-white"
+                onClick={() => {
+                  setToggle(true);
+                  setForm(<EducationForm type="university" toggle={setToggle} />);
+                }}
+              >
+                Add University
+              </button>
             </section>
             <section ref={work} className="h-[400px]" id="3">
               work
@@ -118,6 +158,9 @@ export default function Sidebar() {
           </div>
         </div>
       </div>
+      {toggle && (
+        <FormCover setToggle={setToggle} FormComponent={currentForm} />
+      )}
     </>
   );
 }
