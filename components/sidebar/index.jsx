@@ -1,8 +1,6 @@
-import { useContext, useState } from "react";
-import { jsonContext } from "../../pages";
+import { useState } from "react";
 import CanvasButton from "../canvasInput/canvasButtons";
 import FormCover from "../forms/formCover";
-import FormInput from "../forms/formInput";
 
 //icons start
 import SchoolIcon from "@mui/icons-material/School";
@@ -24,6 +22,7 @@ import { useRef } from "react";
 import EducationForm from "../forms/education";
 import ProfileForm from "../forms/profile";
 import LocationForm from "../forms/location";
+import { useJsonContext } from "../../context/jsonContext";
 //forms end
 
 const sectionButtons = [
@@ -42,7 +41,7 @@ const sectionButtons = [
 ];
 
 export default function Sidebar() {
-  const [formData, setData] = useContext(jsonContext);
+  const [formData, setData] = useJsonContext();
   const profile = useRef(null);
   const location = useRef(null);
   const social = useRef(null);
