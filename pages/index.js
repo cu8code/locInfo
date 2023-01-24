@@ -3,7 +3,7 @@ import EditorCanvas from "../components/editorCanvas";
 import Sidebar from "../components/sidebar";
 import Navbar from "../components/navbar";
 
-import { TemplateContext } from "../context/selectTemplate";
+import { TemplateContext } from "../context/templateContext";
 import { JsonContext } from "../context/jsonContext";
 
 export const jsonContext = createContext(null);

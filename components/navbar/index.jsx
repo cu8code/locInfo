@@ -1,14 +1,13 @@
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
-import useSelectTemplateContext from "../../context/selectTemplate";
+import useTemplateContext from "../../context/templateContext";
 import { useEffect, useRef } from "react";
 export default function Navbar({ zoom, handelZoom, addPages, theme }) {
   const template1 = useRef(null)
-  const [templateValue, setTemplateValue] = useSelectTemplateContext()
+  const [templateValue, setTemplateValue] = useTemplateContext()
   useEffect(() => {
-    setTemplateValue(1)
-    console.log(templateValue);
+    setTemplateValue(2)
   }, [])
   return (
     <>
