@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
-import { jsonContext } from "../../pages";
+import { useJsonContext } from "../../context/jsonContext";
 import FormInput from "./formInput";
 export default function EducationForm({type,toggle }) {
-  const [data,setData] = useContext(jsonContext);
+  const [data,setData] = useJsonContext()
 
   const [name, setName] = useState("");
   const [yearStart, setStart] = useState("");
