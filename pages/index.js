@@ -6,7 +6,6 @@ import Navbar from "../components/navbar";
 import { TemplateContext } from "../context/templateContext";
 import { JsonContext } from "../context/jsonContext";
 
-export const jsonContext = createContext(null);
 
 export default function Home() {
   const [theme, setTheme] = useState("white");
@@ -21,34 +20,30 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col w-full h-screen overflow-x-auto fixed">
-        <div className="w-full min-w-[860px]">
-          <TemplateContext>
-            <Navbar
-              zoom={zoom}
-              handelZoom={handelZoom}
-              addPages={addPages}
-              theme={theme}
-            />
-          </TemplateContext>
-          <div className="flex flex-1 h-[calc(100vh-6rem)]">
-            <JsonContext>
-              <Sidebar />
-            </JsonContext>
-            <div className="bg-gray-800 flex-1 overflow-y-auto scrollbar-none scroll-smooth">
-              <JsonContext>
-                <TemplateContext>
+      <TemplateContext>
+        <JsonContext>
+          <div className="flex flex-col w-full h-screen overflow-x-auto fixed">
+            <div className="w-full min-w-[860px]">
+              <Navbar
+                zoom={zoom}
+                handelZoom={handelZoom}
+                addPages={addPages}
+                theme={theme}
+              />
+              <div className="flex flex-1 h-[calc(100vh-6rem)]">
+                <Sidebar />
+                <div className="bg-gray-800 flex-1 overflow-y-auto scrollbar-none scroll-smooth">
                   <EditorCanvas
                     zoomVal={zoom}
                     pageList={pages}
                     tempNumber={2}
                   />
-                </TemplateContext>
-              </JsonContext>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </JsonContext>
+      </TemplateContext>
     </>
   );
 }
