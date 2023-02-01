@@ -10,9 +10,8 @@ import ReferencesForm from "./references";
 import SkillsForm from "./skills";
 import SocialForm from "./social";
 import WorkExperienceForm from "./workExperience";
-export default function CanvasForm({index}){
+ function CanvasForm({index}){
     const forms=[
-        "",
         <ProfileForm key={1}/>,
         <LanguageForm key={2}/>,
         <SocialForm key={3}/>,

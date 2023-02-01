@@ -1,5 +1,5 @@
 import useTemplateContext from "../../context/templateContext";
-import Templates from "../template/template";
+import Templates from "../template/index";
 
 export default function Page({ pageNumber }) {
   const [template, setTemplate] = useTemplateContext()

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-export const jsonContext = createContext(null);
+const jsonContext = createContext(null);
 
 export function JsonContext({ children }) {
   const [jsonData, setData] = useState({

@@ -5,8 +5,8 @@ export default function ClassicTemplate() {
   const [json, setJson] = useJsonContext();
 
   useEffect(() => {
-    console.log(json)
-  },[json,setJson])
+    console.log("ClassicTemplate")
+  })
 
   return (<>
     <div>
