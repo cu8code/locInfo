@@ -75,11 +75,7 @@ export default function Sidebar() {
   const scrollToView = (elem) => {
     elem.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-  const changeName = (e) => {
-    let copy = { ...formData };
-    copy.profile.name = e.target.value;
-    setData({ ...copy });
-  };
+
   return (
     <>
       <div className="bg-slate-800 w-[40%] min-w-[400px] flex">

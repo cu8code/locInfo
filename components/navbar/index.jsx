@@ -7,8 +7,8 @@ export default function Navbar({ zoom, handelZoom, addPages, theme }) {
   const template1 = useRef(null)
   const [templateValue, setTemplateValue] = useTemplateContext()
   useEffect(() => {
-    setTemplateValue(2)
-  }, [templateValue,setTemplateValue]) 
+    setTemplateValue(1)
+  }, [templateValue,setTemplateValue])
   return (
     <>
       <nav className="w-full h-24 bg-slate-700 min-h-[6rem]">

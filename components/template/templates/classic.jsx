@@ -1,11 +1,20 @@
-export default function ClassicTemplate({ json }) {
+import { useEffect } from "react";
+import { useJsonContext } from "../../../context/jsonContext";
+
+export default function ClassicTemplate() {
+  const [json, setJson] = useJsonContext();
+
+  useEffect(() => {
+    console.log(json)
+  },[json,setJson])
+
   return (<>
     <div>
       <div>
         <h1>{json.name}</h1>
         <h3>{json.headline}</h3>
       </div>
-      <div>{json.city},{json.contry}</div>
+      <div>{json.city} {json.country}</div>
       <div>{json.email} {json.phoneNumber}</div>
     </div>
     <div>
@@ -19,33 +28,12 @@ export default function ClassicTemplate({ json }) {
 
     <div>
       <b>Education</b>
-      {json.education.map((e, i) => {
-        return <div key={i}>
-          {e.institution}
-          {e.degree}
-          {e.areaOfStudy}
-          {e.degree}
-          {e.grade}
-          {e.startDate}
-          {e.endDate}
-          {e.website}
-          {e.summary}
-        </div>
-      })}
+
     </div>
 
     <div>
       <b>Work Experience</b>
-      {json.education.map((e, i) => {
-        return <div key={i}>
-          {e.name}
-          {e.position}
-          {e.startDate}
-          {e.endDate}
-          {e.website}
-          {e.summary}
-        </div>
-      })}
+
     </div>
 
     <div>
@@ -57,7 +45,7 @@ export default function ClassicTemplate({ json }) {
     </div>
 
     <div>
-      <b>Laungage</b>
+      <b>Langrage</b>
     </div>
 
     <div>

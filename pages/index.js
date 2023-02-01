@@ -10,12 +10,12 @@ import { JsonContext } from "../context/jsonContext";
 export default function Home() {
   const [theme, setTheme] = useState("white");
   const [zoom, setZoom] = useState(1.5);
-  const [pages, setpages] = useState([{ key: 1 }]);
+  const [pages, setPages] = useState([{ key: 1 }]);
   const handelZoom = (zoom) => {
     if ((zoom >= 1) & (zoom <= 3)) setZoom(zoom);
   };
   const addPages = () => {
-    setpages([...pages, { key: pages.length + 1 }]);
+    setPages([...pages, { key: pages.length + 1 }]);
   };
 
   return (
