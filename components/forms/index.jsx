@@ -13,18 +13,18 @@ import WorkExperienceForm from "./workExperience";
 export default function CanvasForm({index}){
     const forms=[
         "",
-        <ProfileForm key={1}/>,
-        <LanguageForm key={2}/>,
-        <SocialForm key={3}/>,
-        <EducationForm key={4}/>,
-        <WorkExperienceForm key={5} />,
-        <LocationForm key={6} />,
-        <SkillsForm key={7} />,
-        <CertificatesForm key={8} />,
-        <ProjectsForm key={9} />,
-        <AwardsForm key={10} />,
-        <ReferencesForm key={11} />,
-        <InterestsForm key={12} />,
+        <ProfileForm/>,
+        <LanguageForm/>,
+        <SocialForm/>,
+        <EducationForm/>,
+        <WorkExperienceForm/>,
+        <LocationForm/>,
+        <SkillsForm/>,
+        <CertificatesForm/>,
+        <ProjectsForm/>,
+        <AwardsForm/>,
+        <ReferencesForm/>,
+        <InterestsForm/>,
     ]
     return(
         <>

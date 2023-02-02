@@ -1,6 +1,7 @@
 import Education from "./sections/education";
 import Profile from "./sections/profile";
-import { useJsonContext } from "../../context/jsonContext";
+import { useContext } from "react";
+import { jsonContext } from "../../pages";
 const Empty = () => {
   return <></>;
 };
@@ -25,11 +26,8 @@ const Two = ({ json }) => {
     </>
   );
 };
-const Three = ({json})=>{
-  
-}
-export default function Templates({ num: PageNumber }) {
-const [json,setData] = useJsonContext();
-  const Temp = [<Empty key={1} />, <One json={json} key={2}/>, <Two json={json} key={3}/>];
-  return <>{Temp[PageNumber]}</>;
+export default function Templates({ num }) {
+const [json,setData] = useContext(jsonContext);
+  const Temp = [<Empty />, <One json={json} />, <Two json={json} />];
+  return <>{Temp[num]}</>;
 }
