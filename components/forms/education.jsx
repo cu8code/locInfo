@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
-import { jsonContext } from "../../pages";
+import { useJsonContext } from "../../context/jsonContext";
 import FormInput from "./formInput";
-export default function EducationForm({type,toggle }) {
-  const [data,setData] = useContext(jsonContext);
+export default function EducationForm({ type, toggle }) {
+  const [data, setData] = useJsonContext();
 
   const [name, setName] = useState("");
   const [yearStart, setStart] = useState("");
@@ -13,16 +13,16 @@ export default function EducationForm({type,toggle }) {
     if (type == "school") {
       let eduData = {
         name: name,
-        yearStart:yearStart,
-        yearEnd:yearEnd,
+        yearStart: yearStart,
+        yearEnd: yearEnd,
       };
       copy.education.school.push(eduData);
     } else {
       let eduData = {
         name: name,
-        yearStart:yearStart,
-        yearEnd:yearEnd,
-        degree:degree,
+        yearStart: yearStart,
+        yearEnd: yearEnd,
+        degree: degree,
       };
       copy.education.university.push(eduData);
     }
@@ -39,7 +39,9 @@ export default function EducationForm({type,toggle }) {
         <FormInput val={name} setVal={setName} pHolder="school name" />
         <FormInput val={yearStart} setVal={setStart} pHolder="start year" />
         <FormInput val={yearEnd} setVal={setEnd} pHolder="end year" />
-        <button className="bg-white" onClick={()=>onSubmitClick(type)}>submit</button>
+        <button className="bg-white" onClick={() => onSubmitClick(type)}>
+          submit
+        </button>
       </>
     );
   } else {
@@ -52,7 +54,9 @@ export default function EducationForm({type,toggle }) {
         <FormInput val={yearStart} setVal={setStart} pHolder="start year" />
         <FormInput val={yearEnd} setVal={setEnd} pHolder="end year" />
         <FormInput val={degree} setVal={setDegree} pHolder="degree" />
-        <button className="bg-white" onClick={()=>onSubmitClick(type)}>submit</button>
+        <button className="bg-white" onClick={() => onSubmitClick(type)}>
+          submit
+        </button>
       </>
     );
   }

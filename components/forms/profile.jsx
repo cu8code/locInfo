@@ -1,9 +1,9 @@
-import { useState,useContext,useEffect } from "react";
-import { jsonContext } from "../../pages";
+import { useState, useContext, useEffect } from "react";
+import { useJsonContext } from "../../context/jsonContext";
 import FormInput from "./formInput";
 export default function ProfileForm() {
-  const [data,setData]=useContext(jsonContext);
-  const [name,setName]=useState("");
+  const [data, setData] = useJsonContext();
+  const [name, setName] = useState("");
   const changeName = () => {
     let copy = { ...data };
     copy.profile.name = name;
