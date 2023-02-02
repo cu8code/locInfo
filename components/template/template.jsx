@@ -116,19 +116,19 @@ const Demo = () => {
         <div className="border-r border-slate-300">
           <div className="flex flex-col text-[6px] mt-1 ml-1">
             <div className="">
-              <PhoneIcon className="text-[8px] mr-1" />
+              <PhoneIcon fontSize="8px" className="mr-1" />
               {falseData.profile.number}
             </div>
             <div className="mt-1">
-              <EmailIcon className="text-[8px] mr-1" />
+              <EmailIcon fontSize="8px" className="mr-1" />
               {falseData.profile.email}
             </div>
             <div className="mt-1">
-              <LocationOnIcon className="text-[8px] mr-1" />
+              <LocationOnIcon fontSize="8px" className="mr-1" />
               {falseData.profile.location}
             </div>
             <div className="mt-1">
-              <LanguageIcon className="text-[8px] mr-1" />
+              <LanguageIcon fontSize="8px" className="mr-1" />
               {falseData.profile.website}
             </div>
           </div>
