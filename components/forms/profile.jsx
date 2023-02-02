@@ -12,6 +12,10 @@ export default function ProfileForm() {
   useEffect(() => {
     changeName();
   }, [name]);
+
+  useEffect(()=>{
+    console.log("render")
+  })
   return (
     <>
       <div>

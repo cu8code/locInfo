@@ -6,96 +6,16 @@ import EmailIcon from "@mui/icons-material/Email";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LanguageIcon from "@mui/icons-material/Language";
 import { useJsonContext } from "../../context/jsonContext";
+import { useContext, useEffect, useRef } from "react";
+import jsPDF from "jspdf";
+
 const Empty = () => {
   return <></>;
 };
-const falseData = {
-  profile: {
-    img: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg",
-    name: "Dani Schwaiger",
-    title: "web Developer",
-    number: "123-456-7890",
-    email: "danidev@gmail.com",
-    location: "123 anywhere",
-    website: "danidev.com",
-    desription:
-      "I am a qualified and professional web developer with five years of expirience in database administration and web design.",
-  },
-  social: [
-    {
-      type: "instagram",
-      name: "dani_dev",
-    },
-    {
-      type: "github",
-      name: "dani_dev",
-    },
-  ],
-  education: {
-    school: [
-      {
-        type: "secondary school",
-        name: "Really great high school",
-        yearStart: 2002,
-        yearEnd: 2014,
-      },
-    ],
-    university: [
-      {
-        type: "bachelor of technology",
-        name: "Really great univesity",
-        yearStart: 2014,
-        yearEnd: 2018,
-      },
-    ],
-  },
-  workExperience: [
-    {
-      type: "Apllications Developer",
-      name: "Really great company 1",
-      yearStart: 2018,
-      yearEnd: 2019,
-      description: [
-        "database administration and web design",
-        "build the logivc fr straming ad-services paltform that scaled",
-        "educational instructions and online classroom management",
-      ],
-    },
-    {
-      type: "Web content manager",
-      name: "Really great company 2",
-      yearStart: 2019,
-      yearEnd: 2020,
-      description: [
-        "build the logivc fr straming ad-services paltform that scaled",
-        "database administration and web design",
-        "educational instructions and online classroom management",
-      ],
-    },
-    {
-      type: "Analysis content",
-      name: "Really great company 3",
-      yearStart: 2020,
-      yearEnd: 2021,
-      description: [
-        "educational instructions and online classroom management",
-        "build the logivc fr straming ad-services paltform that scaled",
-        "database administration and web design",
-      ],
-    },
-  ],
-  skills: [
-    "web design",
-    "design thinking",
-    "wireframe creation",
-    "frontend coding",
-    "problem sloving",
-    "computer literacy",
-    "project management tools",
-    "strong communications",
-  ],
-};
+
 const Demo = () => {
+  const [jsonData, setJsonData] = useJsonContext()
+
   return (
     <>
       <main
@@ -105,11 +25,11 @@ const Demo = () => {
         <div className="col-span-2">
           <div className="flex mt-2 bg-slate-100 w-full h-[70%]">
             <div className="flex-1 ml-3">
-              <div className="text-[22px]">{falseData.profile.name}</div>
-              <div className="text-[10px]">{falseData.profile.title}</div>
+              <div className="text-[22px]">{jsonData.profile.name}</div>
+              <div className="text-[10px]">{jsonData.profile.title}</div>
             </div>
             <div className="absolute top-[35px] right-2 w-[55px] h-[55px] overflow-hidden rounded-[50%]">
-              <img className="w-full" src={falseData.profile.img} />
+              <img alt="image" className="w-full" src={jsonData.profile.img} />
             </div>
           </div>
         </div>
@@ -117,19 +37,19 @@ const Demo = () => {
           <div className="flex flex-col text-[6px] mt-1 ml-1">
             <div className="">
               <PhoneIcon fontSize="8px" className="mr-1" />
-              {falseData.profile.number}
+              {jsonData.profile.number}
             </div>
             <div className="mt-1">
               <EmailIcon fontSize="8px" className="mr-1" />
-              {falseData.profile.email}
+              {jsonData.profile.email}
             </div>
             <div className="mt-1">
               <LocationOnIcon fontSize="8px" className="mr-1" />
-              {falseData.profile.location}
+              {jsonData.profile.location}
             </div>
             <div className="mt-1">
               <LanguageIcon fontSize="8px" className="mr-1" />
-              {falseData.profile.website}
+              {jsonData.profile.website}
             </div>
           </div>
         </div>
@@ -139,7 +59,7 @@ const Demo = () => {
               PROFILE
             </div>
             <div className="text-[6px] flex-1">
-              {falseData.profile.desription}
+              {jsonData.profile.desription}
             </div>
           </div>
         </div>
@@ -150,7 +70,7 @@ const Demo = () => {
             </div>
             <div>
               <ul className="list-disc text-[6px] ml-4">
-                {falseData.skills.map((data, i) => {
+                {jsonData.skills.map((data, i) => {
                   return <li key={i}>{data}</li>;
                 })}
               </ul>
@@ -163,7 +83,7 @@ const Demo = () => {
               EDUCATION
             </div>
             <div className="text-[6px] flex flex-col content-evenly flex-1">
-              {falseData.education.school.map((data, i) => {
+              {jsonData.education.school.map((data, i) => {
                 return (
                   <div key={i}>
                     <div className="text-[8px] font-medium">{data.type}</div>
@@ -174,7 +94,7 @@ const Demo = () => {
                   </div>
                 );
               })}
-              {falseData.education.university.map((data, i) => {
+              {jsonData.education.university.map((data, i) => {
                 return (
                   <div key={i}>
                     <div className="text-[8px] font-medium">{data.type}</div>
@@ -194,7 +114,7 @@ const Demo = () => {
               EXPERIENCE
             </div>
             <div className="text-[6px]">
-              {falseData.workExperience.map((data, i) => {
+              {jsonData.workExperience.map((data, i) => {
                 return (
                   <div key={i}>
                     <div className="font-medium text-[8px]">{data.type}</div>

@@ -1,6 +1,23 @@
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import jsPDF from "jspdf";
+
+function generateHTML(template = 0) {
+  return `
+  <div>Anakn</div>
+  `
+}
+
+function save() {
+  const template = 0
+  const download = true
+  const doc = new jsPDF()
+  doc.html(generateHTML(), {
+    callback: () => { download ? doc.save(template) : "" }
+  })
+}
+
 export default function Navbar({ zoom, fn1, fn2, theme }) {
   return (
     <>
@@ -13,6 +30,9 @@ export default function Navbar({ zoom, fn1, fn2, theme }) {
         </button>
         <button onClick={fn2}>
           <NoteAddIcon style={{ color: theme }} />
+        </button>
+        <button onClick={() => { save() }}>
+          {"save"}
         </button>
       </nav>
     </>
