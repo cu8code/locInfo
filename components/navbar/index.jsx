@@ -3,9 +3,12 @@ import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import jsPDF from "jspdf";
 
+
+const heading = ""
+
 function generateHTML(template = 0) {
   return `
-  <div>Anakn</div>
+  <div style=${heading}>Anakn</div>
   `
 }
 

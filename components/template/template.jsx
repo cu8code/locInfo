@@ -6,8 +6,6 @@ import EmailIcon from "@mui/icons-material/Email";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LanguageIcon from "@mui/icons-material/Language";
 import { useJsonContext } from "../../context/jsonContext";
-import { useContext, useEffect, useRef } from "react";
-import jsPDF from "jspdf";
 
 const Empty = () => {
   return <></>;
