@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useJsonContext } from "../../context/jsonContext";
 import FormInput from "./formInput";
 export default function ProfileForm() {
@@ -15,12 +15,11 @@ export default function ProfileForm() {
   return (
     <>
       <div>
-        <div className="w-full bg-cyan-600 text-slate-50 text-center">
+        <div className="w-full bg-[#305688cc] text-slate-50 text-center">
           profile
         </div>
         <div className="text-white">
-          Name:
-          <FormInput val={name} setVal={setName} pHolder="name" />
+          <FormInput val={name} setVal={setName} pHolder="Full Name" />
         </div>
       </div>
     </>

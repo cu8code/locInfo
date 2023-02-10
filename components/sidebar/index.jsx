@@ -3,6 +3,8 @@ import { jsonContext } from "../../pages";
 import CanvasButton from "../canvasInput/canvasButtons";
 import FormCover from "../forms/formCover";
 import FormInput from "../forms/formInput";
+import logo from "../../public/icon.png";
+import Image from "next/image";
 
 //icons start
 import SchoolIcon from "@mui/icons-material/School";
@@ -77,19 +79,24 @@ export default function Sidebar() {
   };
   return (
     <>
-      <div className="bg-slate-800 w-[40%] min-w-[400px] flex">
+      <div className="bg-[#121E31] w-[450px] flex">
         <div>
-          {sectionButtons.map((data, i) => {
-            return (
-              <CanvasButton
-                key={i}
-                Icon={data}
-                callBack={() => scrollToView(refArray[i].current)}
-              />
-            );
-          })}
+          <div className="w-full pt-2 flex justify-center items-center">
+            <Image src={logo} width={40} height={40} alt="Logo"/>
+          </div>
+          <div>
+            {sectionButtons.map((data, i) => {
+              return (
+                <CanvasButton
+                  key={i}
+                  Icon={data}
+                  callBack={() => scrollToView(refArray[i].current)}
+                />
+              );
+            })}
+          </div>
         </div>
-        <div className="flex-1 overflow-auto scrollbar-none scroll-smooth">
+        <div className="flex-1 bg-[#1B2C47] overflow-auto scrollbar-none scroll-smooth">
           <div>
             <section ref={profile} className="h-[400px]" id="1">
               <ProfileForm />
@@ -100,11 +107,7 @@ export default function Sidebar() {
             <section ref={social} className="h-[400px]" id="3">
               social
             </section>
-            <section
-              ref={school}
-              className="h-[400px]"
-              id="3"
-            >
+            <section ref={school} className="h-[400px]" id="3">
               <button
                 className="bg-white"
                 onClick={() => {
@@ -114,12 +117,14 @@ export default function Sidebar() {
               >
                 Add School
               </button>
-              <br/>
+              <br />
               <button
                 className="bg-white"
                 onClick={() => {
                   setToggle(true);
-                  setForm(<EducationForm type="university" toggle={setToggle} />);
+                  setForm(
+                    <EducationForm type="university" toggle={setToggle} />
+                  );
                 }}
               >
                 Add University
