@@ -5,7 +5,6 @@ import Navbar from "../components/navbar";
 import { TemplateContext } from "../context/selectTemplate";
 import { JsonContext } from "../context/jsonContext";
 
-let totalPages = 1;
 export const jsonContext = createContext(null);
 
 export default function Home() {
@@ -27,8 +26,7 @@ export default function Home() {
     if ((zoom >= 1) & (zoom <= 3)) setZoom(zoom);
   };
   const addPages = () => {
-    totalPages++;
-    setpages([...pages, { key: totalPages }]);
+    setpages([...pages, { key: pages.length++ }]);
   };
 
   return (

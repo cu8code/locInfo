@@ -1,14 +1,25 @@
-import Templates from "../template/template";
+import jsPDF from "jspdf";
+import { useEffect, useRef } from "react";
+import { useJsonContext } from "../../context/jsonContext";
 
 export default function Page({ num, temp }) {
+  const jsonContext  = useJsonContext()
+  const ref = useRef(null)
+  useEffect(() => {
+    const doc = new jsPDF()
+    doc.text("lol", 10, 10)
+    const a = doc.output("dataurlstring")
+    ref.current.data = a
+  }, [])
   return (
     <>
-      <div className="bg-white w-[70mm] h-[90mm] select-none">
-        {<Templates num={(num)==1?temp:0} />}
-      </div>
-      <div className="text-slate-50 bg-slate-700 text-xs text-right h-[1rem] mt-[-0.5rem]">
-        Page: {num}
-      </div>
+      <object
+        ref={ref}
+        style={{
+          width: "210mm",
+          height: "297mm"
+        }}
+      />
     </>
   );
 }
